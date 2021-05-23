@@ -48,17 +48,16 @@ def matrix_mod_inv(matrix, modulus):
     # egcd function will return (1,5,-2) if det = 11, modulus = 27
     # egcd(det, modulus)[1] is the second value which is 5
     det_inv = egcd(det, modulus)[1] % modulus  
-    #print(det_inv)
     # Step 3)
     #formula = det_inv * np.round(det * np.linalg.inv(matrix)).astype(int) = [[55 -20], [0 5]]
     #np.linalg.inv is inverse of the matrix
     #convert det * the inverse of the matrix to type integer
-     #in python, (a+b)mod n = [(a mod n)+(b mod n)]mod n 
+    #in python, (a+b)mod n = [(a mod n)+(b mod n)]mod n 
     #hence for negative modulo,  -20% 27 = (-27 + 7) mod 27 = [(-27 mod 27) + 7 mod 27] mod 27 = 7 mod 27 = 7d
     matrix_modulus_inv = (
         det_inv * np.round(det * np.linalg.inv(matrix)).astype(int) % modulus
     ) 
-    #print(det_inv * np.round(det * np.linalg.inv(matrix)).astype(int))
+    
     return matrix_modulus_inv
 
 
@@ -84,27 +83,20 @@ def encrypt(message, K):
         while P.shape[0] != K.shape[0]: 
             P = np.append(P, letter_to_index[" "])[:, np.newaxis]
 
-        #print("P")
-        #print(P)
-
-        #print("np.dot(K, P)")
-        #print(np.dot(K, P))
 
         #To encipher each pair, we perform matrix multiplication, K*P, K is key matrix and P is the splitted text and then mod 27
         numbers = np.dot(K, P) % len(alphabet) # mod 27
 
-        #print("numbers")
-        #print(numbers)
+
 
         n = numbers.shape[0]  # length of encrypted message (in numbers)
 
-        #print("n")
-        #print(n)
+
 
         # Map back to get encrypted text
         for idx in range(n):
             number = int(numbers[idx, 0]) #the 0 is because P is 2-d array, it is like read the first element at each row
-            #print(number)
+
             encrypted += index_to_letter[number] # convert that assigned number back to the alphabet and add it to the encrypted string.
 
     return encrypted
@@ -125,30 +117,23 @@ def decrypt(cipher, Kinv):
         cipher_in_numbers[i: i + int(Kinv.shape[0])]
         for i in range(0, len(cipher_in_numbers), int(Kinv.shape[0]))
     ] #Kinv.shape[0] is 2, hence the split_P will form (1,1) or (1,2) vector for each row
-    #print("Kinv.shape[0]")
-    #print(Kinv.shape[0])
-    #print("split_C")
-    #print(split_C)
 
     #for (1,2) vector in each row after splitting it.
     for C in split_C:
         #transpose the array to vector column , np.asrray is convert input to an array
         #[:, np.newaxis] is used to increase the dimension of the existing array
         C = np.transpose(np.asarray(C))[:, np.newaxis]
-        #print("C")
-        #print(C)
+
         #the encrypted text confirm has even characters. Hence, no need to check whether the spiltted text is (2,1) array or not
 
          #To decrypt each pair, we perform matrix multiplication, Kinv*C, Kinv is inverse key matrix and C is the splitted text and then mod 27
         numbers = np.dot(Kinv, C) % len(alphabet)
 
-        #print("numbers")
-        #print(numbers)
+
 
         n = numbers.shape[0] # length of decrypted message (in numbers)
 
-        #print("n")
-        #print(n)
+
 
         # Map back to get encrypted text
         for idx in range(n):
@@ -160,25 +145,13 @@ def decrypt(cipher, Kinv):
 
 
 
-#print("Implementation of Hill 2-Cipher")
-#print("Assumption: the texts are made up of small letters and space only")
-#print("and our key matrix, K = [[1, 4], [0, 11]]")
-#message = 'we love linear algebra'
-#message = input(str("Enter your message: "))
+
+
 
 K = np.matrix([[1, 4], [0, 11]]) # for length of alphabet = 27
 
 Kinv = matrix_mod_inv(K, len(alphabet))
-#Kinv = np.matrix([[55, -20], [0, 5]])
-#print("inverse key matrix is:")
-#print(Kinv)
-#encrypted_message = encrypt(message, K)
-#decrypted_message = decrypt(encrypted_message, Kinv)
-#print("Original message: " + message)
-#print("")
-#print("Encrypted message: " + encrypted_message)
-#print("")
-#print("Decrypted message: " + decrypted_message)
+#Kinv = np.matrix([[1, 7], [0, 5]])
 
 
 from tkinter import *
