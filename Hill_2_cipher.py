@@ -211,7 +211,7 @@ space2 = Label(root, text="").grid(row=10, column=0)
 myLabel8 = Label(root, text="Encrypted text: ").grid(row=11, column=0)
 myLabel9 = Label(root, text="").grid(row=13, column=0)
 space3 = Label(root, text="").grid(row=14, column=0)
-myLabel10 = Label(root, text="Since we can encrypt the plaintext, we also can decrypt back the the encrypted text.").grid(row=15, column=0)
+myLabel10 = Label(root, text="Since we can encrypt the plaintext, we also can decrypt back the encrypted text.").grid(row=15, column=0)
 myLabel11 = Label(root, text="For decrypt, we are using inverse Key Matrix to do so.\n").grid(row=16, column=0)
 myLabel12 = Label(root, text="Decrypted message from the encrypted plaintext:").grid(row=17, column=0)
 
