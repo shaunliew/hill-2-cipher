@@ -160,7 +160,7 @@ root.title("Hill 2-Cipher")
 
 # creating a label widget
 mylabel1 = Label(
-    root, text="This program is showing the Implementation of Hill 2-Cipher").grid(row=0, column=0)
+    root, text="This program is showing the implementation of Hill 2-Cipher").grid(row=0, column=0)
 
 mylabel2 = Label(
     root, text="There are 2 assumptions in this Hill 2-Cipher program\n").grid(row=1, column=0)
